@@ -32,13 +32,15 @@ typedef struct s_philo
 {
 	int				id;
 	pthread_t		philo_thread;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*print;
 	long long		time_left;
 	long long		life_time;
 	long long		time_to_eat;
 	long long		time_to_sleep;
 	long long		start;
+	long long		last_meal;
 	int				is_eating;
 	int				sleeping;
 }	t_philo;

@@ -29,7 +29,7 @@ void	ft_usleep(int to_sleep)
 	temp_start_time = ft_get_elapsed_time(0);
 	while (1)
 	{
-		if (ft_get_elapsed_time(temp_start_time) == to_sleep)
+		if (ft_get_elapsed_time(temp_start_time) <= to_sleep)
 			break;
 	}
 }

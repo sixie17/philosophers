@@ -18,7 +18,7 @@ OBJS := ${SRCS:.c=.o}
 all:${NAME}
 
 ${NAME} : ${OBJS}
-	cc ${OBJS} -o ${NAME}
+	cc ${OBJS} -pthread -lpthread -o ${NAME}
 
 %.o : %.c
 	cc -c ${CFLAGS} $<

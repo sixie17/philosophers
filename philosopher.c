@@ -14,9 +14,11 @@
 
 void	init_philos(t_philo *philo, t_args args)
 {
-	int	i;
+	int				i;
+	long long		start;
 
 	i = 0;
+	start = ft_get_elapsed_time(0);
 	while (i < args.number_of_philosopher)
 	{
 		philo[i].id = i;
@@ -26,5 +28,8 @@ void	init_philos(t_philo *philo, t_args args)
 		philo[i].time_to_sleep = args.time_to_sleep;
 		philo[i].is_eating = 0;
 		philo[i].sleeping = 0;
+		philo[i].start = start;
+		philo[i].last_meal = start;
+		i++;
 	}
 }
