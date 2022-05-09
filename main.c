@@ -6,7 +6,7 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:22:16 by ysakine           #+#    #+#             */
-/*   Updated: 2022/04/23 12:47:51 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/09 14:04:17 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	main(int ac, char **av)
 		parse_args(ac, av, &args);
 		philosophers = malloc(sizeof(t_philo) * args.number_of_philosopher);
 		if (!philosophers)
-			exit(0);
+			return(0);
 		init_philos(philosophers, args);
 		manage_philosopers(philosophers, args.number_of_philosopher);
+		return 0;
 	}
 	else if (ac < 5)
 		exit_err(0);
