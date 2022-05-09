@@ -6,7 +6,7 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:46:21 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 15:30:53 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/09 16:53:28 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	init_philos(t_philo *philo, t_args args)
 	}
 }
 
-void	init_mutex(pthread_mutex_t *mutex, t_philo *philosophers, int num, pthread_mutex_t *print)
+void	init_mutex(pthread_mutex_t *mutex,
+			t_philo *philosophers, int num, pthread_mutex_t *print)
 {
 	int	i;
 
@@ -47,17 +48,17 @@ void	init_mutex(pthread_mutex_t *mutex, t_philo *philosophers, int num, pthread_
 	{
 		philosophers[i].left_fork = &mutex[i % num];
 		philosophers[i].right_fork = &mutex[(i + 1) % num];
-		i++;	
+		i++;
 	}
 }
 
-void	init_start(t_philo * philo, int num)
+void	init_start(t_philo *philo, int num)
 {
 	long long		start;
 	int				i;
 
 	i = 0;
-	start = ft_get_elapsed_time(0);
+	start = time_passed(0);
 	while (i < num)
 	{
 		philo[i].last_meal = start;
@@ -65,4 +66,3 @@ void	init_start(t_philo * philo, int num)
 		i++;
 	}
 }
-

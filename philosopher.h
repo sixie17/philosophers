@@ -6,20 +6,20 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:38:56 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 15:29:42 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/09 16:53:28 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSEPHERS_H
-#define PHILOSEPHERS_H
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
 
 # include <pthread.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
-typedef struct	s_args
+typedef struct s_args
 {
 	int			number_of_philosopher;
 	long long	time_to_die;
@@ -47,13 +47,15 @@ typedef struct s_philo
 }	t_philo;
 
 int			ft_atoi(const char *str);
-long long	ft_get_elapsed_time(long long start_time);
+long long	time_passed(long long start_time);
 void		ft_usleep(int to_sleep);
 void		init_philos(t_philo *philo, t_args args);
 void		exit_err(int error);
 void		manage_philosopers(t_philo *philosphers, int num);
-void		init_mutex(pthread_mutex_t *mutex, t_philo *philosophers, int num, pthread_mutex_t *print);
+void		init_mutex(pthread_mutex_t *mutex, t_philo *philosophers,
+				int num, pthread_mutex_t *print);
 void		*eat(void *philo);
 void		*ft_sleep(void *philo);
-void		init_start(t_philo * philo, int num);
+void		init_start(t_philo *philo, int num);
+
 #endif
