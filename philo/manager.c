@@ -6,11 +6,37 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:39:37 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 17:04:26 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:30:09 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	destroy_mutexes(pthread_mutex_t *forks, int num)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+}
+
+int	check_eat(t_philo *philos, int num)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		if (philos[0].the_num)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	check_death(t_philo *philos, int num)
 {
@@ -26,13 +52,15 @@ int	check_death(t_philo *philos, int num)
 				< time_passed(philos[i % num].last_meal))
 			{
 				pthread_mutex_lock(philos[i].print);
-				printf("%lld ms philosopher %d is dead\n",
+				printf("%lld ms philosopher %d died\n",
 					time_passed(philos[i % num].start), philos[i % num].id);
 				usleep(100);
 				return (1);
 			}
 			i++;
 		}
+		if (philos->has_num && check_eat(philos, num))
+			return (1);
 	}
 	return (0);
 }
@@ -57,5 +85,9 @@ void	manage_philosopers(t_philo *philosophers, int num)
 		i++;
 	}
 	if (check_death(philosophers, num))
+	{
+		free(forks);
+		destroy_mutexes(forks, num);
 		return ;
+	}
 }

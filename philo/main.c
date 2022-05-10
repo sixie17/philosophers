@@ -6,7 +6,7 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:22:16 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 17:04:44 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:15:49 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@ void	check(t_args args)
 	if (args.number_of_philosopher <= 0 || args.time_to_die <= 0
 		|| args.time_to_eat <= 0 || args.time_to_sleep <= 0)
 		exit_err(1);
+}
+
+int	check_least_amount(t_philo *philosophers, int num)
+{
+	int	i;
+
+	while (1)
+	{
+		i = 0;
+		while (i < num)
+		{
+			if (philosophers[i].the_num <= 0)
+				return (1);
+			i++;
+		}
+	}
+	return (0);
 }
 
 void	parse_args(int ac, char **argv, t_args *args)
@@ -45,8 +62,9 @@ int	main(int ac, char **av)
 		philosophers = malloc(sizeof(t_philo) * args.number_of_philosopher);
 		if (!philosophers)
 			return (0);
-		init_philos(philosophers, args);
+		init_philos(philosophers, args, ac);
 		manage_philosopers(philosophers, args.number_of_philosopher);
+		free(philosophers);
 		return (0);
 	}
 	else if (ac < 5)

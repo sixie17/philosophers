@@ -6,7 +6,7 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:38:56 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 16:53:28 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/10 14:53:23 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,14 @@ typedef struct s_philo
 	long long		time_to_sleep;
 	long long		start;
 	long long		last_meal;
-	int				is_eating;
-	int				sleeping;
-	int				is_dead;
+	int				has_num;
+	int				the_num;
 }	t_philo;
 
 int			ft_atoi(const char *str);
 long long	time_passed(long long start_time);
 void		ft_usleep(int to_sleep);
-void		init_philos(t_philo *philo, t_args args);
+void		init_philos(t_philo *philo, t_args args, int ac);
 void		exit_err(int error);
 void		manage_philosopers(t_philo *philosphers, int num);
 void		init_mutex(pthread_mutex_t *mutex, t_philo *philosophers,

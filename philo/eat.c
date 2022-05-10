@@ -6,7 +6,7 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 18:59:52 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 17:06:15 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:37:51 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	*eat(void *philo)
 	pthread_mutex_lock(philosopher->print);
 	printf("%lld ms philosopher %d has taken a fork\n",
 		time_passed(philosopher->start), philosopher->id);
-	pthread_mutex_unlock(philosopher->print);
-	pthread_mutex_lock(philosopher->print);
 	printf("%lld ms philosopher %d is eating\n",
 		time_passed(philosopher->start), philosopher->id);
 	pthread_mutex_unlock(philosopher->print);
@@ -37,6 +35,8 @@ void	*eat(void *philo)
 	pthread_mutex_unlock(philosopher->left_fork);
 	pthread_mutex_unlock(philosopher->right_fork);
 	philosopher->last_meal = time_passed(0);
+	if (philosopher->has_num)
+		philosopher->the_num--;
 	ft_sleep(philosopher);
 	return (NULL);
 }

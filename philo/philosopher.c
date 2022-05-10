@@ -6,13 +6,13 @@
 /*   By: ysakine <ysakine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:46:21 by ysakine           #+#    #+#             */
-/*   Updated: 2022/05/09 16:53:28 by ysakine          ###   ########.fr       */
+/*   Updated: 2022/05/10 14:53:13 by ysakine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	init_philos(t_philo *philo, t_args args)
+void	init_philos(t_philo *philo, t_args args, int ac)
 {
 	int				i;
 
@@ -24,9 +24,13 @@ void	init_philos(t_philo *philo, t_args args)
 		philo[i].time_left = args.time_to_die;
 		philo[i].time_to_eat = args.time_to_eat;
 		philo[i].time_to_sleep = args.time_to_sleep;
-		philo[i].is_eating = 0;
-		philo[i].sleeping = 0;
-		philo[i].is_dead = 0;
+		if (ac == 6)
+		{
+			philo[i].has_num = 1;
+			philo[i].the_num = args.number_of_times_each_philosopher_must_eat;
+		}
+		else
+			philo[i].has_num = 0;
 		i++;
 	}
 }
